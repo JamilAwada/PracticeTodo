@@ -1,33 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Form from './components/Form'
+import List from './components/List'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+    const [todos, setTodos] = useState([]);
+
+    const addTodo = (todo) => {
+      setTodos([...todos, todo]);
+  };
+
+    const deleteTodo = (index) => {
+        console.log("OMMAK")
+        const newTodos = [...todos];
+        newTodos.splice(index, 1);
+        setTodos(newTodos);
+    };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <>
+    <div className='flex flex-col items-center mt-20'>
+      <h1 className='text-3xl'>Todo List</h1>
+      <p>Simple app using React and MongoDB</p>
+      <Form handleAddTodo={addTodo} />
+      <List todos={todos} handleDeleteTodo={deleteTodo}/>
     </div>
+    
+    
+    </>
+    
+
   )
 }
 
